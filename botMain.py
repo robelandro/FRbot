@@ -12,8 +12,15 @@ client = tg_client.client
 with botClint as opps:
     opps.add_event_handler(tg_helper.start)
 
-with client as n:
-    n.add_event_handler(tg_helper.uptodate)
+with botClint as done:
+    done.add_event_handler(tg_helper.done)
+
+with botClint as m:
+    m.add_event_handler(tg_helper.make_money)
+with botClint as h:
+    h.add_event_handler(tg_helper.helps)
+with botClint as a:
+    a.add_event_handler(tg_helper.about)
 
 # with client as jl:
 #     jl.add_event_handler(tg_helper.joined_leave)

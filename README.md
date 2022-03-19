@@ -1,3 +1,3 @@
 # FRbot
-## Force Subscribe And Refral
+## Force Subscribe And Referral
  made using Telethon

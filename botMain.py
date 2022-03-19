@@ -1,8 +1,9 @@
 import asyncio
 import logging
-
+import handler.main_function as main_function
+import handler.inline_answer as inline_answer
 import handler.clinetbot as tg_client
-import handler.helper as tg_helper
+import handler.starter as tg_helper
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.INFO)
@@ -13,14 +14,14 @@ with botClint as opps:
     opps.add_event_handler(tg_helper.start)
 
 with botClint as done:
-    done.add_event_handler(tg_helper.done)
+    done.add_event_handler(inline_answer.done)
 
 with botClint as m:
-    m.add_event_handler(tg_helper.make_money)
+    m.add_event_handler(main_function.make_money)
 with botClint as h:
-    h.add_event_handler(tg_helper.helps)
+    h.add_event_handler(main_function.helps)
 with botClint as a:
-    a.add_event_handler(tg_helper.about)
+    a.add_event_handler(main_function.about)
 
 # with client as jl:
 #     jl.add_event_handler(tg_helper.joined_leave)

@@ -45,7 +45,8 @@ async def start(event):
         if db.create_table(cone, sql_table):
             # print(friend.stringify())
             await botClint.send_message(
-                message='Hi ' + friend.first_name + ' You are the first users please Join Channel To benefit from the bot',
+                message='Hi ' + friend.first_name + 'You are the first users please Join Channel To benefit from the '
+                                                    'bot',
                 entity=event.peer_id,
                 buttons=[
                     [Button.url('Join', url='https://t.me/ALL_UNVERSITY_IN_ONE'), ],
@@ -55,14 +56,16 @@ async def start(event):
             cone.close()
         elif tg_basic.is_started(bot_user_id):
             text_g = 'Hi ' + friend.first_name + ' wellcome back again I know you like this bot'
-            text_b = 'Hi ' + friend.first_name + ' wellcome back again I know you like this bot ,but I still mad on you , please join the channel'
+            text_b = 'Hi ' + friend.first_name + 'wellcome back again I know you like this bot ,but I still mad on ' \
+                                                 'you , please join the channel '
             await message(text_g, text_b, event, bot_user_id)
 
         else:
             # await event.reply('hi', buttons=Button.clear())
             await event.respond('Someone wants war', buttons=Button.clear())
             await botClint.send_message(
-                message='Hi ' + friend.first_name + 'if you are not yet joined the channel \n please Join Channel To benefit from the bot '
+                message='Hi ' + friend.first_name + 'if you are not yet joined the channel \n please Join Channel To '
+                                                    'benefit from the bot '
                                                     '\n if you joined just press Done',
                 entity=event.peer_id,
                 buttons=[
@@ -91,7 +94,8 @@ async def message(text_g, text_b, event, bot_user_id):
     friend = await botClint.get_entity(bot_user_id)
     if text_g is None or text_b is None:
         text_g = 'Hi ' + friend.first_name + ' wellcome to this bot'
-        text_b = 'Hi ' + friend.first_name + ' wellcome I know you like this bot ,but I still mad on you , please join the channel' \
+        text_b = 'Hi ' + friend.first_name + 'wellcome I know you like this bot ,but I still mad on you , please join ' \
+                                             'the channel' \
                                              'if you joined just press Done'
     if await tg_basic.in_channel(bot_user_id):
         await botClint.send_message(

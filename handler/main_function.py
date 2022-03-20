@@ -7,8 +7,10 @@ botClint = tg_client.botClint
 client = tg_client.client
 
 
-@events.register(events.NewMessage(incoming=True, pattern=r'Make Money'))
+@events.register(events.NewMessage(incoming=True, pattern=r'💸Make Money💸'))
 async def make_money(event):
+    tg_client.previous_position = tg_client.current_position
+    tg_client.current_position = 'Home'
     bot_user_id = event.peer_id.user_id
     friend = await botClint.get_entity(bot_user_id)
     text_b = 'Hi ' + friend.first_name + 'wellcome I know you like this bot ,but I still mad on you , please join ' \
@@ -17,11 +19,7 @@ async def make_money(event):
     if await tg_basic.in_channel(bot_user_id):
         await event.respond('💰', buttons=Button.clear())
         # await botClint.send_message(message='Not Yet Completed', entity=event.peer_id)
-        await botClint.send_message(message=friend.first_name + ' Choice One of them',
-                                    entity=event.peer_id,
-                                    buttons=[[Button.inline('🤼Invite Link🤼', b'i_link'), Button.inline('📒Info About Invited📒', b'iai'), ],
-                                             [Button.inline('💸My Money💸', b'money'), Button.inline('🏦WithDraw🏦', b'withdraw'), ],
-                                             [Button.inline('🏠To Home🏠', b'home'), Button.inline('🔙Back🔙', b'back'), ], ])
+        await tg_basic.when_make_money(event.peer_id, friend.first_name)
     else:
         await event.respond('Someone wants war', buttons=Button.clear())
         # await event.reply('hi', buttons=Button.clear())
@@ -34,7 +32,7 @@ async def make_money(event):
             ])
 
 
-@events.register(events.NewMessage(incoming=True, pattern=r'About'))
+@events.register(events.NewMessage(incoming=True, pattern=r'👨🏾‍💻About🧑🏽‍💻'))
 async def about(event):
     text = """About:
 🖋<i>This bot is developed by @Human_is_code</i>
@@ -42,10 +40,10 @@ async def about(event):
 🔸<b>Built</b> Using Telethon Telegram Client library"""
     bot_user_id = event.peer_id.user_id
     if await tg_basic.in_channel(bot_user_id):
-        await botClint.send_message(message=text, entity=event.peer_id,parse_mode='html')
+        await botClint.send_message(message=text, entity=event.peer_id, parse_mode='html')
 
 
-@events.register(events.NewMessage(incoming=True, pattern=r'help'))
+@events.register(events.NewMessage(incoming=True, pattern=r'🆘help🆘'))
 async def helps(event):
     bot_user_id = event.peer_id.user_id
     if await tg_basic.in_channel(bot_user_id):

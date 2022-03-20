@@ -2,6 +2,7 @@ import random
 from sqlite3 import Error
 from sqlite3 import OperationalError
 
+from telethon import Button
 from telethon.errors import UserNotParticipantError
 
 import dbUtile.dbmanger as db
@@ -148,3 +149,14 @@ async def invited_joined_list(connect, invited_by):
         else:
             list_of.append(False)
     return list_of
+
+
+async def when_make_money(peer_id, first_name):
+    await botClint.send_message(message=first_name + ' Choice One of them',
+                                entity=peer_id,
+                                buttons=[[Button.inline('🤼Invite Link🤼', b'i_link'),
+                                          Button.inline('📒Info About Invited📒', b'iai'), ],
+                                         [Button.inline('💸My Money💸', b'money'),
+                                          Button.inline('🏦WithDraw🏦', b'withdraw'), ],
+                                         [Button.inline('🏠To Home🏠', b'home'),
+                                          Button.inline('🔙Back🔙', b'back'), ], ])

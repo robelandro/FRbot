@@ -8,10 +8,11 @@ botClint = tg_client.botClint
 client = tg_client.client
 
 
-@events.register(events.NewMessage(incoming=True, pattern=r'(\/start)( user_id=(\d{8}))?'))
+@events.register(events.NewMessage(incoming=True, pattern=r'(\/start)( user_id_(\d{8}))?'))
 async def start(event):
     is_referable = event.pattern_match
     referral_link = is_referable.group(3)
+    print(referral_link)
     sql_update = """UPDATE botInfo
    SET invitedby = ?
  WHERE userid = ?;"""
@@ -102,8 +103,8 @@ async def message(text_g, text_b, event, bot_user_id):
             message=text_g,
             entity=event.peer_id,
             buttons=[
-                [Button.text(text='Make Money', resize=True), Button.text(text='help', resize=True)],
-                [Button.text(text='About', resize=True)],
+                [Button.text(text='💸Make Money💸', resize=True), Button.text(text='🆘help🆘', resize=True)],
+                [Button.text(text='👨🏾‍💻About🧑🏽‍💻', resize=True)],
             ])
     else:
         await event.respond('Someone wants war', buttons=Button.clear())

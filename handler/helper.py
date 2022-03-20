@@ -99,3 +99,17 @@ def rangen():
             while k[0] == to_be_return:
                 to_be_return = results_gen()
     return to_be_return
+
+
+def invitation_link(connect, user_id):
+    id_r = None
+    sql_read_for = """SELECT referalid
+      FROM botInfo WHERE userid =""" + str(user_id) + ';'
+    try:
+        read_result = db.select(connect, sql_read_for)
+        for op in read_result:
+            id_r = op[0]
+        return id_r
+    except Error as e:
+        e.with_traceback()
+        return id_r

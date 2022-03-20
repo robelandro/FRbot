@@ -38,7 +38,7 @@ async def done(event):
                 await event.edit(friend.first_name + ' Choice One of them',
                                  buttons=[[Button.inline('🤼Invite Link🤼', b'i_link'),
                                            Button.inline('📒Info About Invited📒', b'iai'), ],
-                                          [Button.inline('💸My Money💸', b'money'),
+                                          [Button.inline('💸My Balance💸', b'money'),
                                            Button.inline('🏦WithDraw🏦', b'withdraw'), ],
                                           [Button.inline('🏠To Home🏠', b'home'),
                                            Button.inline('🔙Back🔙', b'back'), ], ]

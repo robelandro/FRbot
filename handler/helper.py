@@ -161,7 +161,7 @@ async def when_make_money(peer_id, first_name):
                                 entity=peer_id,
                                 buttons=[[Button.inline('🤼Invite Link🤼', b'i_link'),
                                           Button.inline('📒Info About Invited📒', b'iai'), ],
-                                         [Button.inline('💸My Money💸', b'money'),
+                                         [Button.inline('💸My Balance💸', b'money'),
                                           Button.inline('🏦WithDraw🏦', b'withdraw'), ],
                                          [Button.inline('🏠To Home🏠', b'home'),
                                           Button.inline('🔙Back🔙', b'back'), ], ])

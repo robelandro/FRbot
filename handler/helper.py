@@ -1,3 +1,4 @@
+import logging
 import random
 from sqlite3 import Error
 from sqlite3 import OperationalError
@@ -11,6 +12,10 @@ import handler.clinetbot as tg_client
 botClint = tg_client.botClint
 client = tg_client.client
 
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.INFO)
+loger = logging.getLogger()
+
 
 def is_invited(connect, user_id):
     id_r = None
@@ -22,7 +27,7 @@ def is_invited(connect, user_id):
             id_r = op[0]
         return id_r
     except Error as e:
-        e.with_traceback()
+        loger.error(e)
         return id_r
 
 
@@ -36,7 +41,7 @@ def is_owner(connect, referral_link):
             id_r = op[0]
         return id_r
     except Error as e:
-        e.with_traceback()
+        loger.error(e)
         return id_r
 
 
@@ -74,7 +79,7 @@ async def in_channel(user_id):
         await botClint.get_permissions(entity=1193023700, user=user_id)
         return True
     except UserNotParticipantError as e:
-        print(e)
+        loger.error(e)
         return False
 
 
@@ -112,7 +117,7 @@ def invitation_link(connect, user_id):
             id_r = op[0]
         return id_r
     except Error as e:
-        e.with_traceback()
+        print(e)
         return id_r
 
 
@@ -126,7 +131,7 @@ def invited_list(connect, invited_by):
             id_r.append(op[0])
         return id_r
     except Error as e:
-        e.with_traceback()
+        loger.error(e)
         return id_r
 
 

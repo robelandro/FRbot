@@ -36,13 +36,17 @@ async def make_money(event):
 
 @events.register(events.NewMessage(incoming=True, pattern=r'About'))
 async def about(event):
+    text = """About:
+🖋<i>This bot is developed by @Human_is_code</i>
+© Copyright 2022 Nftalem Revision
+🔸<b>Built</b> Using Telethon Telegram Client library"""
     bot_user_id = event.peer_id.user_id
     if await tg_basic.in_channel(bot_user_id):
-        await botClint.send_message(message='Not Yet Completed', entity=event.peer_id)
+        await botClint.send_message(message=text, entity=event.peer_id,parse_mode='html')
 
 
 @events.register(events.NewMessage(incoming=True, pattern=r'help'))
 async def helps(event):
     bot_user_id = event.peer_id.user_id
     if await tg_basic.in_channel(bot_user_id):
-        await botClint.send_message(message='Not Yet Completed', entity=event.peer_id)
+        await botClint.send_message(message='Please  Contact @Human_is_code ', entity=event.peer_id)

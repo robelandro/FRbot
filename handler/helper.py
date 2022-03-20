@@ -113,3 +113,38 @@ def invitation_link(connect, user_id):
     except Error as e:
         e.with_traceback()
         return id_r
+
+
+def invited_list(connect, invited_by):
+    id_r = []
+    sql_read_for = """SELECT userid
+      FROM botInfo WHERE invitedby =""" + str(invited_by) + ';'
+    try:
+        read_result = db.select(connect, sql_read_for)
+        for op in read_result:
+            id_r.append(op[0])
+        return id_r
+    except Error as e:
+        e.with_traceback()
+        return id_r
+
+
+async def invited_list_name(connect, invited_by):
+    first_name_of = []
+
+    for user_id in invited_list(connect, invited_by):
+        friend = await botClint.get_entity(user_id)
+        first_name_of.append(friend.first_name)
+
+    return first_name_of
+
+
+async def invited_joined_list(connect, invited_by):
+    list_of = []
+
+    for user_id in invited_list(connect, invited_by):
+        if await in_channel(user_id):
+            list_of.append(True)
+        else:
+            list_of.append(False)
+    return list_of

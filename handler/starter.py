@@ -103,7 +103,7 @@ async def message(text_g, text_b, event, bot_user_id):
             entity=event.peer_id,
             buttons=[
                 [Button.text(text='Make Money', resize=True), Button.text(text='help', resize=True)],
-                [Button.text(text='About', resize=True)]
+                [Button.text(text='About', resize=True)],
             ])
     else:
         await event.respond('Someone wants war', buttons=Button.clear())

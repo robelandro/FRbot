@@ -1,5 +1,5 @@
 from telethon import events, Button
-
+import dbUtile.dbmanger as db
 import handler.clinetbot as tg_client
 import handler.helper as tg_basic
 
@@ -9,9 +9,11 @@ client = tg_client.client
 
 @events.register(events.NewMessage(incoming=True, pattern=r'💸Make Money💸'))
 async def make_money(event):
-    tg_client.previous_position = tg_client.current_position
-    tg_client.current_position = 'Home'
+    # tg_client.previous_position = tg_client.current_position
+    # tg_client.current_position = 'Home'
     bot_user_id = event.peer_id.user_id
+    cone = db.create_connection('bot_info.db')
+    tg_basic.update_position(cone, bot_user_id, 'Home')
     friend = await botClint.get_entity(bot_user_id)
     text_b = 'Hi ' + friend.first_name + 'wellcome I know you like this bot ,but I still mad on you , please join ' \
                                          'the channel' \

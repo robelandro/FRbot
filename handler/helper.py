@@ -165,3 +165,20 @@ async def when_make_money(peer_id, first_name):
                                           Button.inline('🏦WithDraw🏦', b'withdraw'), ],
                                          [Button.inline('🏠To Home🏠', b'home'),
                                           Button.inline('🔙Back🔙', b'back'), ], ])
+
+
+def update_position(connect, user_id, position):
+    sql_update = """UPDATE botInfo
+   SET position = ?
+ WHERE userid = ?;"""
+    values = (position, user_id)
+    db.update(connect, sql_update, values)
+
+
+def get_position(connect, user_id):
+    result = None
+    sql_read = """SELECT position FROM botInfo WHERE userid =""" + str(user_id) + ';'
+    x = db.select(connect, sql_read)
+    for ir in x:
+        result = ir[0]
+    return result

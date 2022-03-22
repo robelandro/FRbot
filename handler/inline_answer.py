@@ -27,14 +27,14 @@ async def done(event):
         if event.data == b'home':
             await good_message(event, text_g)
         if event.data == b'iai':
-            await fro_information(event, bot_user_id)
+            await fro_information(event, cone, bot_user_id)
         if event.data == b'money':
-            await for_money(event, bot_user_id)
+            await for_money(event, cone, bot_user_id)
         if event.data == b'withdraw':
-            await for_withdraw(event, bot_user_id)
+            await for_withdraw(event, cone, bot_user_id)
         if event.data == b'back':
-            if tg_client.previous_position == 'MakeMoney':
-                tg_client.previous_position = 'Home'
+            if tg_basic.get_position(cone, bot_user_id) == 'MakeMoney':
+                tg_basic.update_position(cone, bot_user_id, 'Home')
                 await event.edit(friend.first_name + ' Choice One of them',
                                  buttons=[[Button.inline('🤼Invite Link🤼', b'i_link'),
                                            Button.inline('📒Info About Invited📒', b'iai'), ],
@@ -99,7 +99,7 @@ async def account(invited_by):
 
 
 async def for_link(event, cone, bot_user_id):
-    tg_client.previous_position = 'MakeMoney'
+    tg_basic.update_position(cone, bot_user_id, 'MakeMoney')
     # tg_client.previous_position = tg_client.current_position
     # tg_client.current_position = 'Invite_link'
     await event.edit('Your Invitation Link Would be :\n\n'
@@ -110,16 +110,16 @@ async def for_link(event, cone, bot_user_id):
                      link_preview=False)
 
 
-async def fro_information(event, bot_user_id):
-    tg_client.previous_position = 'MakeMoney'
+async def fro_information(event, cone, bot_user_id):
+    tg_basic.update_position(cone, bot_user_id, 'MakeMoney')
     # tg_client.previous_position = tg_client.current_position
     # tg_client.current_position = 'Information'
     await event.edit('Your invited status would :\n\n' + await formatted(bot_user_id),
                      buttons=markup_button)
 
 
-async def for_money(event, bot_user_id):
-    tg_client.previous_position = 'MakeMoney'
+async def for_money(event, cone, bot_user_id):
+    tg_basic.update_position(cone, bot_user_id, 'MakeMoney')
     # tg_client.previous_position = tg_client.current_position
     # tg_client.current_position = 'Account'
     await event.edit('Your account balance : ' + str(await account(bot_user_id)) + ' birr\n' +
@@ -127,8 +127,8 @@ async def for_money(event, bot_user_id):
                      buttons=markup_button)
 
 
-async def for_withdraw(event, bot_user_id):
-    tg_client.previous_position = 'MakeMoney'
+async def for_withdraw(event, cone, bot_user_id):
+    tg_basic.update_position(cone, bot_user_id, 'MakeMoney')
     # tg_client.previous_position = tg_client.current_position
     # tg_client.current_position = 'Withdraw'
     if 50 <= await account(bot_user_id):

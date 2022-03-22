@@ -20,7 +20,7 @@ async def start(event):
     bot_user_id = event.peer_id.user_id
     sql_table = '''CREATE TABLE botInfo (
         userid       INTEGER,
-        joined       BOOLEAN,
+        position       STRING,
         warn         BOOLEAN,
         baned        BOOLEAN,
         started      BOOLEAN,
@@ -29,18 +29,16 @@ async def start(event):
     );'''
     sql_insert_start = """INSERT INTO botInfo (
                         userid,
-                        joined,
                         started,
                         referalid
                     )
                     VALUES (?,
                     ?,
-                    ?,
                     ?
                     );"""
 
     cone = db.create_connection('bot_info.db')
-    values = (bot_user_id, False, True, tg_basic.rangen())
+    values = (bot_user_id, True, tg_basic.rangen())
     friend = await botClint.get_entity(bot_user_id)
     if referral_link is None:
         if db.create_table(cone, sql_table):

@@ -13,5 +13,4 @@ bot_token = '1024253219:AAHO7JBCgnYrBRrJR7hNPClIMFWLkaWi2Q8'
 # The first parameter is the .session file name (absolute paths allowed)
 client = TelegramClient('nftalem', api_id, api_hash)
 botClint = TelegramClient('bot', api_id, api_hash).start(bot_token=bot_token)
-current_position = 'home'
-previous_position = 'None'
+

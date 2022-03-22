@@ -39,7 +39,7 @@ async def about(event):
     text = """About:
 🖋<i>This bot is developed by @Human_is_code</i>
 © Copyright 2022 Nftalem Revision
-🔸<b>Built</b> Using Telethon Telegram Client librarys"""
+🔸<b>Built</b> Using Telethon Telegram Client library's"""
     bot_user_id = event.peer_id.user_id
     if await tg_basic.in_channel(bot_user_id):
         await botClint.send_message(message=text, entity=event.peer_id, parse_mode='html')

@@ -1,11 +1,12 @@
 from telethon import events, Button
+from telethon.errors import MessageNotModifiedError
 
 import dbUtile.dbmanger as db
 import handler.clinetbot as tg_client
 import handler.helper as tg_basic
 
 botClint = tg_client.botClint
-client = tg_client.client
+# client = tg_client.client
 
 markup_button = [[Button.inline('🏠To Home🏠', b'home'), Button.inline('🔙Back🔙', b'back'), ], ]
 
@@ -33,18 +34,21 @@ async def done(event):
         if event.data == b'withdraw':
             await for_withdraw(event, cone, bot_user_id)
         if event.data == b'back':
-            if tg_basic.get_position(cone, bot_user_id) == 'MakeMoney':
-                tg_basic.update_position(cone, bot_user_id, 'Home')
-                await event.edit(friend.first_name + ' Choice One of them',
-                                 buttons=[[Button.inline('🤼Invite Link🤼', b'i_link'),
-                                           Button.inline('📒Info About Invited📒', b'iai'), ],
-                                          [Button.inline('💸My Balance💸', b'money'),
-                                           Button.inline('🏦WithDraw🏦', b'withdraw'), ],
-                                          [Button.inline('🏠To Home🏠', b'home'),
-                                           Button.inline('🔙Back🔙', b'back'), ], ]
-                                 )
-            else:
-                await good_message(event, text_g)
+            try:
+                if tg_basic.get_position(cone, bot_user_id) == 'MakeMoney':
+                    await event.edit(friend.first_name + ' Choice One of them',
+                                     buttons=[[Button.inline('🤼Invite Link🤼', b'i_link'),
+                                               Button.inline('📒Info About Invited📒', b'iai'), ],
+                                              [Button.inline('💸My Balance💸', b'money'),
+                                               Button.inline('🏦WithDraw🏦', b'withdraw'), ],
+                                              [Button.inline('🏠To Home🏠', b'home'),
+                                               Button.inline('🔙Back🔙', b'back'), ], ]
+                                     )
+                    tg_basic.update_position(cone, bot_user_id, 'Home')
+                else:
+                    await good_message(event, text_g)
+            except MessageNotModifiedError:
+                await event.edit('You Can\'t  play with old!')
     else:
         await event.respond('Someone wants war', buttons=Button.clear())
         # await event.reply('hi', buttons=Button.clear())

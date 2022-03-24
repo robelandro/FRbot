@@ -10,7 +10,7 @@ import dbUtile.dbmanger as db
 import handler.clinetbot as tg_client
 
 botClint = tg_client.botClint
-client = tg_client.client
+# client = tg_client.client
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.INFO)
@@ -58,25 +58,26 @@ def is_started(user_id):
     return result
 
 
-def is_joined(user_id):
-    cone = db.create_connection('bot_info.db')
-    result = 0
-    sql_read = """SELECT 
-    joined
-    FROM botInfo WHERE userid =""" + str(user_id) + ';'
-    x = db.select(cone, sql_read)
-    for ir in x:
-        result = ir[0]
-    print(result)
-    return result
+# def is_joined(user_id):
+#     cone = db.create_connection('bot_info.db')
+#     result = 0
+#     sql_read = """SELECT
+#     joined
+#     FROM botInfo WHERE userid =""" + str(user_id) + ';'
+#     x = db.select(cone, sql_read)
+#     for ir in x:
+#         result = ir[0]
+#     print(result)
+#     return result
 
 
 async def in_channel(user_id):
     print(user_id)
     try:
         print("yes")
+        k = await botClint.get_input_entity('ALL_UNVERSITY_IN_ONE')
         await botClint.get_participants('ALL_UNVERSITY_IN_ONE')
-        await botClint.get_permissions(entity=1193023700, user=user_id)
+        await botClint.get_permissions(entity=k.channel_id, user=user_id)
         return True
     except UserNotParticipantError as e:
         loger.error(e)

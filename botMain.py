@@ -7,8 +7,9 @@ import handler.starter as tg_helper
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.INFO)
+bot_token = '1024253219:AAHO7JBCgnYrBRrJR7hNPClIMFWLkaWi2Q8'
 botClint = tg_client.botClint
-client = tg_client.client
+# client = tg_client.client
 
 with botClint as opps:
     opps.add_event_handler(tg_helper.start)
@@ -30,8 +31,8 @@ with botClint as a:
 def main():
     loop = asyncio.get_event_loop()
 
-    botClint.start()
-    client.start()
+    botClint.start(bot_token=bot_token)
+    # client.start()
 
     loop.run_forever()
 

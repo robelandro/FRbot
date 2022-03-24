@@ -4,7 +4,7 @@ import handler.clinetbot as tg_client
 import handler.helper as tg_basic
 
 botClint = tg_client.botClint
-client = tg_client.client
+# client = tg_client.client
 
 
 @events.register(events.NewMessage(incoming=True, pattern=r'💸Make Money💸'))
